@@ -25,49 +25,172 @@ const tools = [
   },
 ]
 
-function App() {
-  const [query, setQuery] = useState('')
-  const gridRef = useRef(null)
+function BackgroundCanvas() {
+  const canvasRef = useRef(null)
+  const mouseRef = useRef({ x: -1000, y: -1000 })
+  const blobsRef = useRef([
+    { x: 0.2, y: 0.3, r: 0.15, vx: 0.0003, vy: 0.0002, phase: 0, color: [69, 229, 139] },
+    { x: 0.7, y: 0.6, r: 0.12, vx: -0.0002, vy: 0.0003, phase: 2, color: [0, 191, 194] },
+    { x: 0.5, y: 0.8, r: 0.1, vx: 0.00025, vy: -0.00015, phase: 4, color: [69, 229, 139] },
+    { x: 0.3, y: 0.5, r: 0.08, vx: -0.0002, vy: -0.00025, phase: 1, color: [0, 191, 194] },
+  ])
+  const particlesRef = useRef([])
   const rafRef = useRef(null)
 
   useEffect(() => {
-    let visible = false
-    const handleMouse = (e) => {
-      const el = gridRef.current
-      if (!el) return
-      if (!visible) {
-        visible = true
-        el.classList.add('visible')
-        el.classList.add('no-transition')
-        requestAnimationFrame(() => el.classList.remove('no-transition'))
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let w, h, dpr
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2)
+      w = window.innerWidth
+      h = window.innerHeight
+      canvas.width = w * dpr
+      canvas.height = h * dpr
+      canvas.style.width = w + 'px'
+      canvas.style.height = h + 'px'
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    const initParticles = () => {
+      const count = Math.min(40, Math.floor((w * h) / 25000))
+      particlesRef.current = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 1,
+      }))
+    }
+
+    resize()
+    initParticles()
+    window.addEventListener('resize', () => { resize(); initParticles() })
+
+    const onMouse = (e) => { mouseRef.current.x = e.clientX; mouseRef.current.y = e.clientY }
+    const onLeave = () => { mouseRef.current.x = -1000; mouseRef.current.y = -1000 }
+    window.addEventListener('mousemove', onMouse)
+    document.addEventListener('mouseleave', onLeave)
+
+    let time = 0
+    const draw = () => {
+      time += 0.016
+      ctx.clearRect(0, 0, w, h)
+      const mx = mouseRef.current.x
+      const my = mouseRef.current.y
+
+      // --- Blobs ---
+      const blobs = blobsRef.current
+      for (const b of blobs) {
+        b.phase += b.vx * 2
+        b.x += Math.sin(b.phase) * b.vx + Math.cos(time * 0.5 + b.phase) * 0.0001
+        b.y += Math.cos(b.phase * 0.7) * b.vy + Math.sin(time * 0.3 + b.phase) * 0.0001
+        if (b.x < -0.1) b.x = 1.1
+        if (b.x > 1.1) b.x = -0.1
+        if (b.y < -0.1) b.y = 1.1
+        if (b.y > 1.1) b.y = -0.1
+        const bx = b.x * w, by = b.y * h, br = b.r * Math.min(w, h)
+        const grad = ctx.createRadialGradient(bx, by, 0, bx, by, br)
+        const [r, g, bl] = b.color
+        grad.addColorStop(0, `rgba(${r},${g},${bl},0.12)`)
+        grad.addColorStop(0.4, `rgba(${r},${g},${bl},0.05)`)
+        grad.addColorStop(1, 'transparent')
+        ctx.fillStyle = grad
+        ctx.beginPath()
+        ctx.arc(bx, by, br, 0, Math.PI * 2)
+        ctx.fill()
       }
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        el.style.setProperty('--gx', e.clientX + 'px')
-        el.style.setProperty('--gy', e.clientY + 'px')
-      })
+
+      // --- Grid ---
+      const gridSize = 48
+      const focusRadius = 220
+      ctx.lineWidth = 1
+      for (let x = 0; x <= w; x += gridSize) {
+        const dist = mx >= 0 ? Math.abs(x - mx) : focusRadius
+        const opacity = mx >= 0 ? Math.max(0.02, 0.08 * (1 - dist / focusRadius)) : 0.02
+        ctx.strokeStyle = `rgba(255,255,255,${opacity})`
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, h)
+        ctx.stroke()
+      }
+      for (let y = 0; y <= h; y += gridSize) {
+        const dist = my >= 0 ? Math.abs(y - my) : focusRadius
+        const opacity = my >= 0 ? Math.max(0.02, 0.08 * (1 - dist / focusRadius)) : 0.02
+        ctx.strokeStyle = `rgba(255,255,255,${opacity})`
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(w, y)
+        ctx.stroke()
+      }
+
+      // --- Mouse glow on grid ---
+      if (mx >= 0) {
+        const glowGrad = ctx.createRadialGradient(mx, my, 0, mx, my, focusRadius)
+        glowGrad.addColorStop(0, 'rgba(69,229,139,0.06)')
+        glowGrad.addColorStop(1, 'transparent')
+        ctx.fillStyle = glowGrad
+        ctx.beginPath()
+        ctx.arc(mx, my, focusRadius, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      // --- Particles ---
+      const particles = particlesRef.current
+      for (const p of particles) {
+        p.x += p.vx
+        p.y += p.vy
+        if (p.x < 0) p.x = w
+        if (p.x > w) p.x = 0
+        if (p.y < 0) p.y = h
+        if (p.y > h) p.y = 0
+      }
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x
+          const dy = particles[i].y - particles[j].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 140) {
+            const alpha = 0.08 * (1 - dist / 140)
+            ctx.strokeStyle = `rgba(69,229,139,${alpha})`
+            ctx.lineWidth = 0.5
+            ctx.beginPath()
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.stroke()
+          }
+        }
+      }
+      for (const p of particles) {
+        ctx.fillStyle = 'rgba(69,229,139,0.2)'
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      rafRef.current = requestAnimationFrame(draw)
     }
-    const handleLeave = () => {
-      visible = false
-      if (gridRef.current) gridRef.current.classList.remove('visible')
-    }
-    window.addEventListener('mousemove', handleMouse)
-    document.addEventListener('mouseleave', handleLeave)
+    rafRef.current = requestAnimationFrame(draw)
+
     return () => {
-      window.removeEventListener('mousemove', handleMouse)
-      document.removeEventListener('mouseleave', handleLeave)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('mousemove', onMouse)
+      document.removeEventListener('mouseleave', onLeave)
+      window.removeEventListener('resize', resize)
     }
   }, [])
 
+  return <canvas ref={canvasRef} className="bg-canvas" />
+}
+
+function App() {
+  const [query, setQuery] = useState('')
+
   return (
     <main>
-      <div className="lava-blobs">
-        <div className="lava-blob" />
-        <div className="lava-blob" />
-        <div className="lava-blob" />
-      </div>
-      <div ref={gridRef} className="grid-cursor" />
+      <BackgroundCanvas />
       <header className="header">
         <a className="brand" href="/"><Command /><b>HUB</b></a>
         <nav><a className="active" href="#ferramentas">Ferramentas</a><a href="#sobre">Sobre</a></nav>
