@@ -1,19 +1,16 @@
-import { StrictMode, useMemo, useState } from 'react'
+import { StrictMode, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   ArrowUpRight,
   Box,
   Braces,
   Check,
-  Clock3,
   Code2,
   Command,
-  Github,
   Layers3,
   LockKeyhole,
   Palette,
   Search,
-  Sparkles,
   Zap,
 } from 'lucide-react'
 import './styles.css'
@@ -57,37 +54,40 @@ const tools = [
 function App() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('Todas')
+  const glowRef = useRef(null)
+
+  useEffect(() => {
+    const handleMouse = (e) => {
+      if (glowRef.current) {
+        glowRef.current.style.setProperty('--mx', e.clientX + 'px')
+        glowRef.current.style.setProperty('--my', e.clientY + 'px')
+      }
+    }
+    window.addEventListener('mousemove', handleMouse)
+    return () => window.removeEventListener('mousemove', handleMouse)
+  }, [])
+
   const filtered = useMemo(() => tools.filter((tool) => {
     const matchesQuery = `${tool.name} ${tool.type} ${tool.description}`.toLowerCase().includes(query.toLowerCase())
     return matchesQuery && (category === 'Todas' || tool.category === category)
   }), [query, category])
 
   return (
-    <main>
+    <main ref={glowRef} className="has-glow">
+      <div className="grid-bg" />
       <header className="header">
         <a className="brand" href="#"><Command /><b>Hub</b></a>
         <nav><a className="active" href="#ferramentas">Ferramentas</a><a href="#novidades">Novidades</a><a href="#sobre">Sobre</a></nav>
         <label className="top-search"><Search /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar ferramentas..." /><kbd>⌘ K</kbd></label>
-        <a className="github" href="https://github.com/faelrecords/hub" target="_blank" rel="noreferrer" aria-label="GitHub"><Github /></a>
       </header>
 
       <div className="container">
         <section className="hero">
           <div className="hero-copy">
-            <h1>Ferramentas simples.<em>Trabalho direto.</em></h1>
+            <h1>Central de Ferramentas<br /><span className="hero-sub">Hub de ferramentas by @fael.records</span></h1>
             <p>Uma coleção de ferramentas independentes para desenvolvedores e designers. Cada ferramenta tem seu foco, sua interface e seus dados. Sempre que possível, tudo acontece no seu navegador.</p>
             <div className="principles"><span><Zap /> Rápidas</span><span><LockKeyhole /> Privadas</span><span><Braces /> Client-side</span></div>
           </div>
-          <aside className="platform-card">
-            <span className="eyebrow"><i /> Plataforma</span>
-            <h2>Hub</h2>
-            <p>Selecione uma ferramenta abaixo para acessar sua aplicação.</p>
-            <div className="platform-stats">
-              <span><Sparkles /><b>1</b><small>Disponível</small></span>
-              <span><Clock3 /><b>3</b><small>Em breve</small></span>
-              <span><Box /><b>4</b><small>Total</small></span>
-            </div>
-          </aside>
         </section>
 
         <section id="ferramentas" className="catalog">
@@ -119,7 +119,7 @@ function DesignTool({ tool }) {
         <div className="mini-editor"><small>Cores</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
         <div className="mini-page"><small>Preview</small><h3>Defina seu sistema.<em>Veja cada mudança.</em></h3><p>Tokens visuais em tempo real.</p><button>Começar</button></div>
       </div>
-      <div className="tool-action"><a href={tool.url} target="_blank" rel="noreferrer">Abrir ferramenta <ArrowUpRight /></a><small>faelrecords.github.io/Design/</small></div>
+      <div className="tool-action"><a href={tool.url} target="_blank" rel="noreferrer">Abrir ferramenta <ArrowUpRight /></a></div>
     </article>
   )
 }
