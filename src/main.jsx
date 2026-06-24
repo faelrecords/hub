@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useMemo, useRef, useState } from 'react'
+import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   ArrowUpRight,
@@ -27,27 +27,47 @@ const tools = [
 
 function App() {
   const [query, setQuery] = useState('')
-  const glowRef = useRef(null)
+  const gridRef = useRef(null)
+  const rafRef = useRef(null)
 
   useEffect(() => {
+    let visible = false
     const handleMouse = (e) => {
-      if (glowRef.current) {
-        glowRef.current.style.setProperty('--mx', e.clientX + 'px')
-        glowRef.current.style.setProperty('--my', e.clientY + 'px')
+      const el = gridRef.current
+      if (!el) return
+      if (!visible) {
+        visible = true
+        el.classList.add('visible')
+        el.classList.add('no-transition')
+        requestAnimationFrame(() => el.classList.remove('no-transition'))
       }
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(() => {
+        el.style.setProperty('--gx', e.clientX + 'px')
+        el.style.setProperty('--gy', e.clientY + 'px')
+      })
+    }
+    const handleLeave = () => {
+      visible = false
+      if (gridRef.current) gridRef.current.classList.remove('visible')
     }
     window.addEventListener('mousemove', handleMouse)
-    return () => window.removeEventListener('mousemove', handleMouse)
+    document.addEventListener('mouseleave', handleLeave)
+    return () => {
+      window.removeEventListener('mousemove', handleMouse)
+      document.removeEventListener('mouseleave', handleLeave)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (
-    <main ref={glowRef} className="has-glow">
+    <main>
       <div className="lava-blobs">
         <div className="lava-blob" />
         <div className="lava-blob" />
         <div className="lava-blob" />
       </div>
-      <div className="grid-bg" />
+      <div ref={gridRef} className="grid-cursor" />
       <header className="header">
         <a className="brand" href="/"><Command /><b>HUB</b></a>
         <nav><a className="active" href="#ferramentas">Ferramentas</a><a href="#sobre">Sobre</a></nav>
