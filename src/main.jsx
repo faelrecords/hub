@@ -2,15 +2,12 @@ import { StrictMode, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   ArrowUpRight,
-  Box,
   Braces,
-  Check,
-  Code2,
   Command,
-  Layers3,
   LockKeyhole,
   Palette,
   Search,
+  Shield,
   Sparkles,
   Zap,
 } from 'lucide-react'
@@ -26,35 +23,10 @@ const tools = [
     available: true,
     icon: Palette,
   },
-  {
-    name: 'Contrast',
-    category: 'Design',
-    type: 'Acessibilidade',
-    description: 'Verifique contraste de cores e acessibilidade com base nas diretrizes WCAG.',
-    available: false,
-    icon: Box,
-  },
-  {
-    name: 'Tokens',
-    category: 'Desenvolvimento',
-    type: 'Design Tokens',
-    description: 'Gerencie design tokens e exporte para diferentes formatos com facilidade.',
-    available: false,
-    icon: Layers3,
-  },
-  {
-    name: 'Convert',
-    category: 'Utilitários',
-    type: 'Conversores',
-    description: 'Converta cores, unidades e códigos entre diferentes formatos.',
-    available: false,
-    icon: Code2,
-  },
 ]
 
 function App() {
   const [query, setQuery] = useState('')
-  const [category, setCategory] = useState('Todas')
   const glowRef = useRef(null)
 
   useEffect(() => {
@@ -68,48 +40,59 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouse)
   }, [])
 
-  const filtered = useMemo(() => tools.filter((tool) => {
-    const matchesQuery = `${tool.name} ${tool.type} ${tool.description}`.toLowerCase().includes(query.toLowerCase())
-    return matchesQuery && (category === 'Todas' || tool.category === category)
-  }), [query, category])
-
   return (
     <main ref={glowRef} className="has-glow">
       <div className="grid-bg" />
       <header className="header">
-        <a className="brand" href="#"><Command /><b>Hub</b></a>
-        <nav><a className="active" href="#ferramentas">Ferramentas</a><a href="#novidades">Novidades</a><a href="#sobre">Sobre</a></nav>
+        <a className="brand" href="/"><Command /><b>HUB</b></a>
+        <nav><a className="active" href="#ferramentas">Ferramentas</a><a href="#sobre">Sobre</a></nav>
         <label className="top-search"><Search /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar ferramentas..." /><kbd>⌘ K</kbd></label>
       </header>
 
       <div className="container">
-        <section className="hero">
+        <section className="hero fade-in">
           <div className="hero-copy">
-            <h1>Hub de <span className="green">Ferramentas</span><br /><span className="hero-sub">Hub de ferramentas by <a href="https://instagram.com/fael.records" target="_blank" rel="noreferrer" className="green">@fael.records</a></span></h1>
+            <h1>Hub de <span className="green">Ferramentas</span><br /><span className="hero-sub">by <a href="https://instagram.com/fael.records" className="green">@fael.records</a></span></h1>
             <p>Uma coleção de ferramentas independentes para desenvolvedores e designers. Cada ferramenta tem seu foco, sua interface e seus dados. Sempre que possível, tudo acontece no seu navegador.</p>
-            <div className="principles"><span><Zap /> Rápidas</span><span><LockKeyhole /> Privadas</span><span><Braces /> Client-side</span></div>
+            <div className="principles"><span><Zap /> Rápidas</span><span><Shield /> Privadas</span><span><Braces /> Client-side</span></div>
           </div>
         </section>
 
-        <section id="ferramentas" className="catalog">
-          <div className="filters">
-            <div>{['Todas', 'Design', 'Desenvolvimento', 'Utilitários'].map((item) => <button key={item} className={category === item ? 'active' : ''} onClick={() => setCategory(item)}>{item}</button>)}</div>
-            <label><Search /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar por nome ou categoria..." /></label>
-          </div>
-
+        <section id="ferramentas" className="catalog fade-in-up">
           <div className="tool-list">
-            {filtered.map((tool) => tool.available ? <DesignTool key={tool.name} tool={tool} /> : <ComingTool key={tool.name} tool={tool} />)}
-            {!filtered.length && <div className="empty">Nenhuma ferramenta encontrada.</div>}
+            {tools.map((tool) => <DesignTool key={tool.name} tool={tool} />)}
+            <article className="tool coming fade-in-up" style={{animationDelay: '.15s'}}>
+              <div className="tool-icon"><LockKeyhole /></div>
+              <div className="tool-copy"><div className="title-row"><h2>Mais ferramentas</h2><span>Em breve</span></div><b>Novidades</b><p>Estamos trabalhando em novas ferramentas para ampliar o Hub. Fique atento!</p></div>
+              <button disabled><LockKeyhole /> Em breve</button>
+            </article>
           </div>
+        </section>
 
-          <div className="coming-soon-banner">
-            <Sparkles />
-            <span>Mais ferramentas em breve</span>
+        <section id="sobre" className="about-section fade-in-up">
+          <h2>Sobre o <span className="green">HUB</span></h2>
+          <p>O Hub reúne ferramentas leves e independentes para quem trabalha com design e desenvolvimento. Sem login, sem complicação — tudo roda direto no navegador.</p>
+          <div className="about-grid">
+            <div className="about-card">
+              <Zap />
+              <h3>Rápido</h3>
+              <p>Sem carregamentos pesados. Ferramentas que abrem e funcionam na hora.</p>
+            </div>
+            <div className="about-card">
+              <Shield />
+              <h3>Privado</h3>
+              <p>Seus dados ficam no seu navegador. Nada é enviado para servidores externos.</p>
+            </div>
+            <div className="about-card">
+              <Sparkles />
+              <h3>Simples</h3>
+              <p>Cada ferramenta faz uma coisa bem feita. Sem features desnecessárias.</p>
+            </div>
           </div>
         </section>
       </div>
 
-      <footer id="sobre"><a className="brand" href="#"><Command /><b>Hub</b></a><span>© 2026 Hub. Ferramentas independentes.</span><div><a href="#ferramentas">Ferramentas</a><a href="#novidades">Novidades</a><a href="#sobre">Sobre</a></div></footer>
+      <footer><a className="brand" href="/"><Command /><b>HUB</b></a><span>© 2026 Hub. Ferramentas independentes.</span><div><a href="#ferramentas">Ferramentas</a><a href="#sobre">Sobre</a></div></footer>
     </main>
   )
 }
@@ -117,7 +100,7 @@ function App() {
 function DesignTool({ tool }) {
   const Icon = tool.icon
   return (
-    <article className="tool featured">
+    <article className="tool featured fade-in-up">
       <div className="tool-icon"><Icon /></div>
       <div className="tool-copy"><div className="title-row"><h2>{tool.name}</h2><span>Disponível</span></div><b>{tool.type}</b><p>{tool.description}</p></div>
       <div className="design-preview">
@@ -125,18 +108,7 @@ function DesignTool({ tool }) {
         <div className="mini-editor"><small>Cores</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
         <div className="mini-page"><small>Preview</small><h3>Defina seu sistema.<em>Veja cada mudança.</em></h3><p>Tokens visuais em tempo real.</p><button>Começar</button></div>
       </div>
-      <div className="tool-action"><a href={tool.url} target="_blank" rel="noreferrer">Abrir ferramenta <ArrowUpRight /></a></div>
-    </article>
-  )
-}
-
-function ComingTool({ tool }) {
-  const Icon = tool.icon
-  return (
-    <article className="tool coming">
-      <div className="tool-icon"><Icon /></div>
-      <div className="tool-copy"><div className="title-row"><h2>{tool.name}</h2><span>Em breve</span></div><b>{tool.type}</b><p>{tool.description}</p></div>
-      <button disabled><LockKeyhole /> Em breve</button>
+      <div className="tool-action"><a href={tool.url}>Abrir ferramenta <ArrowUpRight /></a></div>
     </article>
   )
 }
