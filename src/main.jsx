@@ -42,6 +42,11 @@ function App() {
 
   return (
     <main ref={glowRef} className="has-glow">
+      <div className="lava-blobs">
+        <div className="lava-blob" />
+        <div className="lava-blob" />
+        <div className="lava-blob" />
+      </div>
       <div className="grid-bg" />
       <header className="header">
         <a className="brand" href="/"><Command /><b>HUB</b></a>
