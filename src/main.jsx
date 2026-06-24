@@ -2,9 +2,12 @@ import { StrictMode, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   ArrowUpRight,
+  Box,
   Braces,
+  Check,
   Code2,
   Command,
+  Layers3,
   LockKeyhole,
   Palette,
   Search,
@@ -22,6 +25,30 @@ const tools = [
     url: 'https://faelrecords.github.io/Design/',
     available: true,
     icon: Palette,
+  },
+  {
+    name: 'Contrast',
+    category: 'Design',
+    type: 'Acessibilidade',
+    description: 'Verifique contraste de cores e acessibilidade com base nas diretrizes WCAG.',
+    available: false,
+    icon: Box,
+  },
+  {
+    name: 'Tokens',
+    category: 'Desenvolvimento',
+    type: 'Design Tokens',
+    description: 'Gerencie design tokens e exporte para diferentes formatos com facilidade.',
+    available: false,
+    icon: Layers3,
+  },
+  {
+    name: 'Convert',
+    category: 'Utilitários',
+    type: 'Conversores',
+    description: 'Converta cores, unidades e códigos entre diferentes formatos.',
+    available: false,
+    icon: Code2,
   },
 ]
 
@@ -71,7 +98,7 @@ function App() {
           </div>
 
           <div className="tool-list">
-            {filtered.map((tool) => <DesignTool key={tool.name} tool={tool} />)}
+            {filtered.map((tool) => tool.available ? <DesignTool key={tool.name} tool={tool} /> : <ComingTool key={tool.name} tool={tool} />)}
             {!filtered.length && <div className="empty">Nenhuma ferramenta encontrada.</div>}
           </div>
 
@@ -92,17 +119,24 @@ function DesignTool({ tool }) {
   return (
     <article className="tool featured">
       <div className="tool-icon"><Icon /></div>
-      <div className="tool-copy">
-        <div className="title-row"><h2>{tool.name}</h2><span>Disponível</span></div>
-        <b>{tool.type}</b>
-        <p>{tool.description}</p>
-      </div>
+      <div className="tool-copy"><div className="title-row"><h2>{tool.name}</h2><span>Disponível</span></div><b>{tool.type}</b><p>{tool.description}</p></div>
       <div className="design-preview">
         <div className="mini-sidebar"><small>Design.MD</small><i /><i className="selected" /><i /><i /><i /></div>
         <div className="mini-editor"><small>Cores</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
         <div className="mini-page"><small>Preview</small><h3>Defina seu sistema.<em>Veja cada mudança.</em></h3><p>Tokens visuais em tempo real.</p><button>Começar</button></div>
       </div>
       <div className="tool-action"><a href={tool.url} target="_blank" rel="noreferrer">Abrir ferramenta <ArrowUpRight /></a></div>
+    </article>
+  )
+}
+
+function ComingTool({ tool }) {
+  const Icon = tool.icon
+  return (
+    <article className="tool coming">
+      <div className="tool-icon"><Icon /></div>
+      <div className="tool-copy"><div className="title-row"><h2>{tool.name}</h2><span>Em breve</span></div><b>{tool.type}</b><p>{tool.description}</p></div>
+      <button disabled><LockKeyhole /> Em breve</button>
     </article>
   )
 }
