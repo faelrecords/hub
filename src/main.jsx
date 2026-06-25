@@ -26,10 +26,19 @@ const tools = [
     available: true,
     icon: Palette,
   },
+  {
+    name: 'Context',
+    category: 'Desenvolvimento',
+    type: 'Gerenciador de Contexto',
+    description: 'Gerencie projetos, prompts e AGENTS.md em um só lugar. Organize seu fluxo de trabalho com IA.',
+    url: 'https://faelrecords.github.io/Context/',
+    available: true,
+    icon: Layers,
+  },
 ]
 
 const stats = [
-  { label: 'Ferramentas', value: 4, suffix: '' },
+  { label: 'Ferramentas', value: 2, suffix: '' },
   { label: 'Gratuito', value: 100, suffix: '%' },
   { label: 'Dados coletados', value: 0, suffix: '' },
   { label: 'Possibilidades', value: 999, suffix: '+' },
@@ -332,11 +341,19 @@ function DesignTool({ tool }) {
     <article className="tool featured">
       <div className="tool-icon"><Icon /></div>
       <div className="tool-copy"><div className="title-row"><h2>{tool.name}</h2><span>Disponível</span></div><b>{tool.type}</b><p>{tool.description}</p></div>
-      <div className="design-preview">
-        <div className="mini-sidebar"><small>Design.MD</small><i /><i className="selected" /><i /><i /><i /></div>
-        <div className="mini-editor"><small>Cores</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
-        <div className="mini-page"><small>Preview</small><h3>Defina seu sistema.<em>Veja cada mudança.</em></h3><p>Tokens visuais em tempo real.</p><button>Começar</button></div>
-      </div>
+      {tool.name === 'Design' ? (
+        <div className="design-preview">
+          <div className="mini-sidebar"><small>Design.MD</small><i /><i className="selected" /><i /><i /><i /></div>
+          <div className="mini-editor"><small>Cores</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
+          <div className="mini-page"><small>Preview</small><h3>Defina seu sistema.<em>Veja cada mudança.</em></h3><p>Tokens visuais em tempo real.</p><button>Começar</button></div>
+        </div>
+      ) : (
+        <div className="design-preview">
+          <div className="mini-sidebar"><small>Context</small><i /><i className="selected" /><i /><i /><i /></div>
+          <div className="mini-editor"><small>Projetos</small><span><i /><i /><i /><i /><i /></span><div /><div /></div>
+          <div className="mini-page"><small>Dashboard</small><h3>Gerencie seu contexto.<em>Organize tudo.</em></h3><p>Projetos, prompts e AGENTS.md.</p><button>Abrir</button></div>
+        </div>
+      )}
       <div className="tool-action"><a href={tool.url}>Abrir ferramenta <ArrowUpRight /></a></div>
     </article>
   )
