@@ -12,7 +12,6 @@ if (typeof window !== "undefined") {
 const INJECTED_STYLES = `
   .gsap-reveal { visibility: hidden; }
 
-  /* Environment Overlays */
   .film-grain {
       position: absolute; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 50; opacity: 0.05; mix-blend-mode: overlay;
@@ -21,7 +20,7 @@ const INJECTED_STYLES = `
 
   .bg-grid-theme {
       background-size: 60px 60px;
-      background-image: 
+      background-image:
           linear-gradient(to right, color-mix(in srgb, var(--color-foreground) 5%, transparent) 1px, transparent 1px),
           linear-gradient(to bottom, color-mix(in srgb, var(--color-foreground) 5%, transparent) 1px, transparent 1px);
       mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
@@ -30,8 +29,8 @@ const INJECTED_STYLES = `
 
   .text-3d-matte {
       color: var(--color-foreground);
-      text-shadow: 
-          0 10px 30px color-mix(in srgb, var(--color-foreground) 20%, transparent), 
+      text-shadow:
+          0 10px 30px color-mix(in srgb, var(--color-foreground) 20%, transparent),
           0 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent);
   }
 
@@ -41,8 +40,8 @@ const INJECTED_STYLES = `
       -webkit-text-fill-color: transparent;
       background-clip: text;
       transform: translateZ(0);
-      filter: 
-          drop-shadow(0px 10px 20px color-mix(in srgb, var(--color-foreground) 15%, transparent)) 
+      filter:
+          drop-shadow(0px 10px 20px color-mix(in srgb, var(--color-foreground) 15%, transparent))
           drop-shadow(0px 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent));
   }
 
@@ -52,33 +51,33 @@ const INJECTED_STYLES = `
       -webkit-text-fill-color: transparent;
       background-clip: text;
       transform: translateZ(0);
-      filter: 
-          drop-shadow(0px 12px 24px rgba(0,0,0,0.8)) 
+      filter:
+          drop-shadow(0px 12px 24px rgba(0,0,0,0.8))
           drop-shadow(0px 4px 8px rgba(0,0,0,0.6));
   }
 
   .premium-depth-card {
-      background: linear-gradient(145deg, #162C6D 0%, #0A101D 100%);
-      box-shadow: 
+      background: linear-gradient(145deg, #121715 0%, #080B0A 100%);
+      box-shadow:
           0 40px 100px -20px rgba(0, 0, 0, 0.9),
           0 20px 40px -20px rgba(0, 0, 0, 0.8),
-          inset 0 1px 2px rgba(255, 255, 255, 0.2),
+          inset 0 1px 2px rgba(69, 229, 139, 0.1),
           inset 0 -2px 4px rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(69, 229, 139, 0.06);
       position: relative;
   }
 
   .card-sheen {
       position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 50;
-      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 40%);
+      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(69,229,139,0.04) 0%, transparent 40%);
       mix-blend-mode: screen; transition: opacity 0.3s ease;
   }
 
   .iphone-bezel {
       background-color: #111;
-      box-shadow: 
-          inset 0 0 0 2px #52525B, 
-          inset 0 0 0 7px #000, 
+      box-shadow:
+          inset 0 0 0 2px #52525B,
+          inset 0 0 0 7px #000,
           0 40px 80px -15px rgba(0,0,0,0.9),
           0 15px 25px -5px rgba(0,0,0,0.7);
       transform-style: preserve-3d;
@@ -86,20 +85,20 @@ const INJECTED_STYLES = `
 
   .hardware-btn {
       background: linear-gradient(90deg, #404040 0%, #171717 100%);
-      box-shadow: 
+      box-shadow:
           -2px 0 5px rgba(0,0,0,0.8),
           inset -1px 0 1px rgba(255,255,255,0.15),
           inset 1px 0 2px rgba(0,0,0,0.8);
       border-left: 1px solid rgba(255,255,255,0.05);
   }
-  
+
   .screen-glare {
       background: linear-gradient(110deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 45%);
   }
 
   .widget-depth {
       background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      box-shadow: 
+      box-shadow:
           0 10px 20px rgba(0,0,0,0.3),
           inset 0 1px 1px rgba(255,255,255,0.05),
           inset 0 -1px 1px rgba(0,0,0,0.5);
@@ -108,46 +107,47 @@ const INJECTED_STYLES = `
 
   .floating-ui-badge {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(24px); 
+      backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      box-shadow: 
+      box-shadow:
           0 0 0 1px rgba(255, 255, 255, 0.1),
           0 25px 50px -12px rgba(0, 0, 0, 0.8),
           inset 0 1px 1px rgba(255,255,255,0.2),
           inset 0 -1px 1px rgba(0,0,0,0.5);
   }
 
-  .btn-modern-light, .btn-modern-dark {
+  .btn-hub-primary {
+      background: linear-gradient(180deg, #45E58B 0%, #38CC7A 100%);
+      color: #080B0A;
+      box-shadow: 0 0 0 1px rgba(69,229,139,0.3), 0 2px 4px rgba(0,0,0,0.3), 0 12px 24px -4px rgba(69,229,139,0.3), inset 0 1px 1px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(0,0,0,0.1);
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .btn-modern-light {
-      background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
-      color: #0F172A;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.1), 0 12px 24px -4px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,1), inset 0 -3px 6px rgba(0,0,0,0.06);
-  }
-  .btn-modern-light:hover {
+  .btn-hub-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 6px 12px -2px rgba(0,0,0,0.15), 0 20px 32px -6px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,1), inset 0 -3px 6px rgba(0,0,0,0.06);
+      background: linear-gradient(180deg, #52F09A 0%, #45E58B 100%);
+      box-shadow: 0 0 0 1px rgba(69,229,139,0.4), 0 6px 12px -2px rgba(0,0,0,0.3), 0 20px 32px -6px rgba(69,229,139,0.4), inset 0 1px 1px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(0,0,0,0.1);
   }
-  .btn-modern-light:active {
+  .btn-hub-primary:active {
       transform: translateY(1px);
-      background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1), inset 0 3px 6px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.02);
+      background: #38CC7A;
+      box-shadow: 0 0 0 1px rgba(69,229,139,0.2), inset 0 3px 6px rgba(0,0,0,0.15);
   }
-  .btn-modern-dark {
+
+  .btn-hub-secondary {
       background: linear-gradient(180deg, #27272A 0%, #18181B 100%);
       color: #FFFFFF;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.6), 0 12px 24px -4px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -3px 6px rgba(0,0,0,0.8);
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .btn-modern-dark:hover {
+  .btn-hub-secondary:hover {
       transform: translateY(-3px);
       background: linear-gradient(180deg, #3F3F46 0%, #27272A 100%);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 12px -2px rgba(0,0,0,0.7), 0 20px 32px -6px rgba(0,0,0,1), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(0,0,0,0.8);
   }
-  .btn-modern-dark:active {
+  .btn-hub-secondary:active {
       transform: translateY(1px);
       background: #18181B;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 3px 8px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 3px 8px rgba(0,0,0,0.9);
   }
 
   .progress-ring {
@@ -171,20 +171,20 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   ctaDescription?: string;
 }
 
-export function CinematicHero({ 
-  brandName = "Sobers",
-  tagline1 = "Track the journey,",
-  tagline2 = "not just the days.",
-  cardHeading = "Accountability, redefined.",
-  cardDescription = <><span className="text-white font-semibold">Sobers</span> empowers sponsors and sponsees in 12-step recovery programs with structured accountability, precise sobriety tracking, and beautiful visual timelines.</>,
-  metricValue = 365,
-  metricLabel = "Days Sober",
-  ctaHeading = "Start your recovery.",
-  ctaDescription = "Join thousands of others in the 12-step program and take control of your timeline today.",
-  className, 
-  ...props 
+export function CinematicHero({
+  brandName = "HUB",
+  tagline1 = "Ferramentas que,",
+  tagline2 = "aceleram seu fluxo.",
+  cardHeading = "Ecossistema de produtividade.",
+  cardDescription = <><span className="text-white font-semibold">Hub</span> reúne ferramentas independentes para designers e desenvolvedores — Design System, Context Manager e mais — tudo rodando no browser.</>,
+  metricValue = 2,
+  metricLabel = "Ferramentas",
+  ctaHeading = "Explorar ferramentas.",
+  ctaDescription = "Ferramentas criadas para quem ama interfaces bonitas e código limpo. Tudo open source.",
+  className,
+  ...props
 }: CinematicHeroProps) {
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
@@ -195,13 +195,13 @@ export function CinematicHero({
       if (window.scrollY > window.innerHeight * 2) return;
 
       cancelAnimationFrame(requestRef.current);
-      
+
       requestRef.current = requestAnimationFrame(() => {
         if (mainCardRef.current && mockupRef.current) {
           const rect = mainCardRef.current.getBoundingClientRect();
           const mouseX = e.clientX - rect.left;
           const mouseY = e.clientY - rect.top;
-          
+
           mainCardRef.current.style.setProperty("--mouse-x", `${mouseX}px`);
           mainCardRef.current.style.setProperty("--mouse-y", `${mouseY}px`);
 
@@ -267,25 +267,25 @@ export function CinematicHero({
         .fromTo(".card-right-text", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
         .to({}, { duration: 2.5 })
         .set(".hero-text-wrapper", { autoAlpha: 0 })
-        .set(".cta-wrapper", { autoAlpha: 1 }) 
+        .set(".cta-wrapper", { autoAlpha: 1 })
         .to({}, { duration: 1.5 })
         .to([".mockup-scroll-wrapper", ".floating-badge", ".card-left-text", ".card-right-text"], {
           scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05,
         })
-        .to(".main-card", { 
-          width: isMobile ? "92vw" : "85vw", 
-          height: isMobile ? "92vh" : "85vh", 
-          borderRadius: isMobile ? "32px" : "40px", 
-          ease: "expo.inOut", 
-          duration: 1.8 
-        }, "pullback") 
+        .to(".main-card", {
+          width: isMobile ? "92vw" : "85vw",
+          height: isMobile ? "92vh" : "85vh",
+          borderRadius: isMobile ? "32px" : "40px",
+          ease: "expo.inOut",
+          duration: 1.8
+        }, "pullback")
         .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
         .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
 
     }, containerRef);
 
     return () => ctx.revert();
-  },[metricValue]); 
+  },[metricValue]);
 
   return (
     <div
@@ -315,23 +315,13 @@ export function CinematicHero({
           {ctaDescription}
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
-          <a href="#" aria-label="Download on the App Store" className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            <svg className="w-8 h-8 transition-transform group-hover:scale-105" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true">
-              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-            </svg>
-            <div className="text-left">
-              <div className="text-[10px] font-bold tracking-wider text-neutral-500 uppercase mb-[-2px]">Download on the</div>
-              <div className="text-xl font-bold leading-none tracking-tight">App Store</div>
-            </div>
+          <a href="#ferramentas" className="btn-hub-primary flex items-center justify-center gap-3 px-8 py-4 rounded-[10px] font-semibold text-lg group focus:outline-none focus:ring-2 focus:ring-[#45E58B] focus:ring-offset-2 focus:ring-offset-background">
+            <svg className="w-6 h-6 transition-transform group-hover:scale-105" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+            Ver ferramentas
           </a>
-          <a href="#" aria-label="Get it on Google Play" className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-background">
-            <svg className="w-7 h-7 transition-transform group-hover:scale-105" fill="currentColor" viewBox="0 0 512 512" aria-hidden="true">
-               <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
-            </svg>
-            <div className="text-left">
-              <div className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase mb-[-2px]">Get it on</div>
-              <div className="text-xl font-bold leading-none tracking-tight">Google Play</div>
-            </div>
+          <a href="https://github.com/faelrecords" target="_blank" rel="noopener noreferrer" className="btn-hub-secondary flex items-center justify-center gap-3 px-8 py-4 rounded-[10px] font-semibold text-lg group focus:outline-none focus:ring-2 focus:ring-[#45E58B] focus:ring-offset-2 focus:ring-offset-background">
+            <svg className="w-6 h-6 transition-transform group-hover:scale-105" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
           </a>
         </div>
       </div>
@@ -344,7 +334,7 @@ export function CinematicHero({
           <div className="card-sheen" aria-hidden="true" />
 
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
-            
+
             <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
               <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0">
                 {brandName}
@@ -352,9 +342,9 @@ export function CinematicHero({
             </div>
 
             <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
-              
+
               <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-85 lg:scale-100">
-                
+
                 <div
                   ref={mockupRef}
                   className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform transform-style-3d"
@@ -364,54 +354,50 @@ export function CinematicHero({
                   <div className="absolute top-[220px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
                   <div className="absolute top-[170px] -right-[3px] w-[3px] h-[70px] hardware-btn rounded-r-md z-0 scale-x-[-1]" aria-hidden="true" />
 
-                  <div className="absolute inset-[7px] bg-[#050914] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_15px_rgba(0,0,0,1)] text-white z-10">
+                  <div className="absolute inset-[7px] bg-[#080B0A] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_15px_rgba(0,0,0,1)] text-white z-10">
                     <div className="absolute inset-0 screen-glare z-40 pointer-events-none" aria-hidden="true" />
 
                     <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[100px] h-[28px] bg-black rounded-full z-50 flex items-center justify-end px-3 shadow-[inset_0_-1px_2px_rgba(255,255,255,0.1)]">
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#45E58B] shadow-[0_0_8px_rgba(69,229,139,0.8)] animate-pulse" />
                     </div>
 
-                    <div className="relative w-full h-full pt-12 px-5 pb-8 flex flex-col">
-                      <div className="phone-widget flex justify-between items-center mb-8">
+                    <div className="relative w-full h-full pt-12 px-4 pb-8 flex flex-col overflow-hidden">
+                      <div className="phone-widget flex justify-between items-center mb-6">
                         <div className="flex flex-col">
-                          <span className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold mb-1">Today</span>
-                          <span className="text-xl font-bold tracking-tight text-white drop-shadow-md">Journey</span>
+                          <span className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold mb-1">Hub</span>
+                          <span className="text-xl font-bold tracking-tight text-white drop-shadow-md">Ferramentas</span>
                         </div>
-                        <div className="w-9 h-9 rounded-full bg-white/5 text-neutral-200 flex items-center justify-center font-bold text-sm border border-white/10 shadow-lg shadow-black/50">JS</div>
+                        <div className="w-9 h-9 rounded-full bg-[#45E58B]/10 text-[#45E58B] flex items-center justify-center font-bold text-sm border border-[#45E58B]/20 shadow-lg shadow-black/50">FR</div>
                       </div>
 
-                      <div className="phone-widget relative w-44 h-44 mx-auto flex items-center justify-center mb-8 drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)]">
+                      <div className="phone-widget relative w-40 h-40 mx-auto flex items-center justify-center mb-6 drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)]">
                         <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
-                          <circle cx="88" cy="88" r="64" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="12" />
-                          <circle className="progress-ring" cx="88" cy="88" r="64" fill="none" stroke="#3B82F6" strokeWidth="12" />
+                          <circle cx="80" cy="80" r="58" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="10" />
+                          <circle className="progress-ring" cx="80" cy="80" r="58" fill="none" stroke="#45E58B" strokeWidth="10" />
                         </svg>
                         <div className="text-center z-10 flex flex-col items-center">
                           <span className="counter-val text-4xl font-extrabold tracking-tighter text-white">0</span>
-                          <span className="text-[8px] text-blue-200/50 uppercase tracking-[0.1em] font-bold mt-0.5">{metricLabel}</span>
+                          <span className="text-[8px] text-[#45E58B]/60 uppercase tracking-[0.1em] font-bold mt-0.5">{metricLabel}</span>
                         </div>
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/5 flex items-center justify-center mr-3 border border-blue-400/20 shadow-inner">
-                            <svg className="w-4 h-4 text-blue-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                      <div className="space-y-2.5">
+                        <div className="phone-widget widget-depth rounded-xl p-3 flex items-center">
+                          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#45E58B]/20 to-[#45E58B]/5 flex items-center justify-center mr-3 border border-[#45E58B]/20 shadow-inner shrink-0">
+                            <svg className="w-4 h-4 text-[#45E58B] drop-shadow-md" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-20 bg-neutral-300 rounded-full mb-2 shadow-inner" />
-                            <div className="h-1.5 w-12 bg-neutral-600 rounded-full shadow-inner" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-xs font-semibold truncate">Design System</p>
+                            <p className="text-neutral-500 text-[10px] truncate">Editor visual de tokens</p>
                           </div>
                         </div>
-                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/5 flex items-center justify-center mr-3 border border-emerald-400/20 shadow-inner">
-                            <svg className="w-4 h-4 text-emerald-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
+                        <div className="phone-widget widget-depth rounded-xl p-3 flex items-center">
+                          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#00BFC2]/20 to-[#00BFC2]/5 flex items-center justify-center mr-3 border border-[#00BFC2]/20 shadow-inner shrink-0">
+                            <svg className="w-4 h-4 text-[#00BFC2] drop-shadow-md" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-16 bg-neutral-300 rounded-full mb-2 shadow-inner" />
-                            <div className="h-1.5 w-24 bg-neutral-600 rounded-full shadow-inner" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-xs font-semibold truncate">Context Manager</p>
+                            <p className="text-neutral-500 text-[10px] truncate">Gerencie contexto de projetos</p>
                           </div>
                         </div>
                       </div>
@@ -422,22 +408,22 @@ export function CinematicHero({
                 </div>
 
                 <div className="floating-badge absolute flex top-6 lg:top-12 left-[-15px] lg:left-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 lg:gap-4 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-blue-500/20 to-blue-900/10 flex items-center justify-center border border-blue-400/30 shadow-inner">
-                    <span className="text-base lg:text-xl drop-shadow-lg" aria-hidden="true">🔥</span>
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-[#45E58B]/20 to-[#45E58B]/10 flex items-center justify-center border border-[#45E58B]/30 shadow-inner">
+                    <span className="text-base lg:text-xl drop-shadow-lg" aria-hidden="true">🛠</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">1 Year Streak</p>
-                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Milestone unlocked</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">2 Ferramentas</p>
+                    <p className="text-[#45E58B]/50 text-[10px] lg:text-xs font-medium">Disponíveis agora</p>
                   </div>
                 </div>
 
                 <div className="floating-badge absolute flex bottom-12 lg:bottom-20 right-[-15px] lg:right-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 lg:gap-4 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-indigo-500/20 to-indigo-900/10 flex items-center justify-center border border-indigo-400/30 shadow-inner">
-                    <span className="text-base lg:text-lg drop-shadow-lg" aria-hidden="true">🤝</span>
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-[#00BFC2]/20 to-[#00BFC2]/10 flex items-center justify-center border border-[#00BFC2]/30 shadow-inner">
+                    <span className="text-base lg:text-lg drop-shadow-lg" aria-hidden="true">🔓</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Sponsor Update</p>
-                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Shared successfully</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Open Source</p>
+                    <p className="text-[#00BFC2]/50 text-[10px] lg:text-xs font-medium">100% Gratuito</p>
                   </div>
                 </div>
 
@@ -448,7 +434,7 @@ export function CinematicHero({
               <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-5 tracking-tight">
                 {cardHeading}
               </h3>
-              <p className="hidden md:block text-blue-100/70 text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-sm lg:max-w-none">
+              <p className="hidden md:block text-[#94A29B] text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-sm lg:max-w-none">
                 {cardDescription}
               </p>
             </div>
