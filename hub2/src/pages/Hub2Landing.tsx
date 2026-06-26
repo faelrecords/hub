@@ -225,7 +225,6 @@ export function Hub2Landing() {
           <p className="text-[#94A29B] text-sm">© 2026 Hub. Ferramentas independentes.</p>
           <div className="flex items-center gap-5">
             <a href="#ferramentas" className="text-[#94A29B] text-sm hover:text-[#45E58B] transition-colors">Ferramentas</a>
-            <a href="https://github.com/faelrecords" target="_blank" rel="noopener noreferrer" className="text-[#94A29B] text-sm hover:text-[#45E58B] transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
