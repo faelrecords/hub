@@ -1,3 +1,4 @@
 node_modules
-dist
+dist/*
+!dist/hub2/
 *.log
