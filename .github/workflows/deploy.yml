@@ -28,6 +28,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+
+      - name: Build Hub2
+        working-directory: hub2
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copy Hub2 dist to Hub dist
+        run: cp -r hub2/dist dist/hub2
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,4 +1,5 @@
 node_modules
-dist/*
-!dist/hub2/
+hub2/node_modules
+dist
+hub2/dist
 *.log
