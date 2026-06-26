@@ -40,6 +40,7 @@ const INJECTED_STYLES = `
       text-shadow:
           0 10px 30px rgba(69,229,139,0.15),
           0 2px 4px rgba(0,0,0,0.3);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   }
 
   .text-accent-glow {
@@ -48,6 +49,7 @@ const INJECTED_STYLES = `
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0px 0px 30px rgba(69,229,139,0.25));
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   }
 
   .text-silver-matte {
@@ -59,6 +61,7 @@ const INJECTED_STYLES = `
       filter:
           drop-shadow(0px 10px 20px color-mix(in srgb, var(--color-foreground) 15%, transparent))
           drop-shadow(0px 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent));
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   }
 
   .premium-depth-card {
@@ -329,18 +332,18 @@ export function CinematicHero({
 
           <div className="relative w-full h-full max-w-6xl mx-auto px-6 lg:px-12 flex flex-col justify-center items-center z-10 py-10 lg:py-0">
 
-            <div className="card-left-text gsap-reveal flex flex-col justify-center text-center mb-8 lg:mb-12 z-20 w-full">
-              <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
+            <div className="card-left-text gsap-reveal flex flex-col justify-start lg:justify-center text-left mb-8 lg:mb-12 z-20 w-full lg:max-w-xl">
+              <h3 className="text-white text-2xl md:text-3xl lg:text-[2.5rem] font-bold mb-4 tracking-tight leading-tight">
                 Ecossistema de produtividade.
               </h3>
-              <p className="text-[#94A29B] text-sm md:text-base font-normal leading-relaxed max-w-lg mx-auto">
+              <p className="text-[#94A29B] text-sm md:text-base font-normal leading-relaxed">
                 Ferramentas independentes para designers e desenvolvedores. Design System, Context Manager e mais — tudo no browser.
               </p>
             </div>
 
             <div className="mockup-scroll-wrapper relative w-full flex justify-center z-10" style={{ perspective: "1000px" }}>
 
-              <div className="relative flex items-center justify-center transform scale-[0.6] md:scale-80 lg:scale-100">
+              <div className="relative flex items-center justify-center transform scale-[0.65] md:scale-[0.85] lg:scale-100">
 
                 <div
                   ref={mockupRef}
@@ -358,66 +361,78 @@ export function CinematicHero({
                       <div className="w-1.5 h-1.5 rounded-full bg-[#45E58B] shadow-[0_0_6px_rgba(69,229,139,0.8)]" />
                     </div>
 
-                    <div className="relative w-full flex-1 flex flex-col pt-11 px-4 pb-5 overflow-hidden">
+                    <div className="relative w-full flex-1 flex flex-col pt-11 px-3 pb-4 overflow-hidden">
 
-                      <div className="phone-widget flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-[#45E58B] flex items-center justify-center">
-                            <svg className="w-4 h-4 text-[#0a0f0c]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" /></svg>
+                      <div className="phone-widget flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-7 h-7 rounded-lg bg-[#45E58B] flex items-center justify-center">
+                            <svg className="w-3.5 h-3.5 text-[#0a0f0c]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" /></svg>
                           </div>
-                          <div>
-                            <span className="text-[9px] text-[#94A29B] uppercase tracking-widest font-semibold block leading-none mb-0.5">Hub</span>
-                            <span className="text-sm font-bold tracking-tight text-white leading-none">Ferramentas</span>
-                          </div>
+                          <span className="text-[11px] font-bold tracking-tight text-white">Hub</span>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-[#45E58B]/10 text-[#45E58B] flex items-center justify-center text-[10px] font-bold border border-[#45E58B]/20">FR</div>
+                        <div className="w-7 h-7 rounded-full bg-[#45E58B]/10 text-[#45E58B] flex items-center justify-center text-[9px] font-bold border border-[#45E58B]/20">FR</div>
                       </div>
 
-                      <div className="phone-widget relative w-36 h-36 mx-auto flex items-center justify-center mb-5">
-                        <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
-                          <circle cx="72" cy="72" r="54" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="8" />
-                          <circle className="progress-ring" cx="72" cy="72" r="54" fill="none" stroke="#45E58B" strokeWidth="8" />
-                        </svg>
-                        <div className="text-center z-10 flex flex-col items-center">
-                          <span className="counter-val text-3xl font-extrabold tracking-tighter text-white leading-none">0</span>
-                          <span className="text-[7px] text-[#45E58B]/50 uppercase tracking-[0.12em] font-semibold mt-1">Ferramentas</span>
+                      <div className="phone-widget grid grid-cols-2 gap-2 mb-3">
+                        <div className="saas-stat rounded-xl p-2.5">
+                          <p className="text-[7px] text-[#94A29B] uppercase tracking-widest font-semibold mb-1">Tools</p>
+                          <p className="text-lg font-bold text-white leading-none">2</p>
+                          <p className="text-[7px] text-[#45E58B] mt-1">Ativas</p>
+                        </div>
+                        <div className="saas-stat rounded-xl p-2.5">
+                          <p className="text-[7px] text-[#94A29B] uppercase tracking-widest font-semibold mb-1">Status</p>
+                          <p className="text-lg font-bold text-white leading-none">100%</p>
+                          <p className="text-[7px] text-[#00BFC2] mt-1">Gratuito</p>
                         </div>
                       </div>
 
-                      <div className="space-y-2 phone-widget">
-                        <div className="saas-card rounded-xl p-3 flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-[#45E58B]/10 flex items-center justify-center border border-[#45E58B]/15 shrink-0">
-                            <svg className="w-4 h-4 text-[#45E58B]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" /></svg>
+                      <div className="phone-widget relative mb-3">
+                        <div className="saas-card rounded-xl p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="text-[9px] text-[#94A29B] uppercase tracking-widest font-semibold">Atividade</p>
+                            <p className="text-[8px] text-[#45E58B]">7 dias</p>
+                          </div>
+                          <div className="flex items-end gap-1 h-8">
+                            <div className="w-full bg-[#45E58B]/20 rounded-t" style={{height: '40%'}}></div>
+                            <div className="w-full bg-[#45E58B]/30 rounded-t" style={{height: '60%'}}></div>
+                            <div className="w-full bg-[#45E58B]/40 rounded-t" style={{height: '35%'}}></div>
+                            <div className="w-full bg-[#45E58B]/50 rounded-t" style={{height: '80%'}}></div>
+                            <div className="w-full bg-[#45E58B]/60 rounded-t" style={{height: '55%'}}></div>
+                            <div className="w-full bg-[#45E58B]/80 rounded-t" style={{height: '90%'}}></div>
+                            <div className="w-full bg-[#45E58B] rounded-t" style={{height: '100%'}}></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 phone-widget">
+                        <div className="saas-card rounded-xl p-2.5 flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-[#45E58B]/10 flex items-center justify-center border border-[#45E58B]/15 shrink-0">
+                            <svg className="w-3.5 h-3.5 text-[#45E58B]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" /></svg>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-white text-[11px] font-semibold truncate">Design System</p>
-                            <p className="text-[#94A29B] text-[9px] truncate">Editor visual de tokens</p>
+                            <p className="text-white text-[10px] font-semibold truncate">Design System</p>
+                            <p className="text-[#94A29B] text-[8px] truncate">Editor visual de tokens</p>
                           </div>
-                          <div className="w-5 h-5 rounded-full bg-[#45E58B]/10 flex items-center justify-center shrink-0">
-                            <svg className="w-2.5 h-2.5 text-[#45E58B]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                          </div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#45E58B] shrink-0"></div>
                         </div>
-                        <div className="saas-card rounded-xl p-3 flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-[#00BFC2]/10 flex items-center justify-center border border-[#00BFC2]/15 shrink-0">
-                            <svg className="w-4 h-4 text-[#00BFC2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
+                        <div className="saas-card rounded-xl p-2.5 flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-[#00BFC2]/10 flex items-center justify-center border border-[#00BFC2]/15 shrink-0">
+                            <svg className="w-3.5 h-3.5 text-[#00BFC2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-white text-[11px] font-semibold truncate">Context Manager</p>
-                            <p className="text-[#94A29B] text-[9px] truncate">Gerencie contexto de projetos</p>
+                            <p className="text-white text-[10px] font-semibold truncate">Context Manager</p>
+                            <p className="text-[#94A29B] text-[8px] truncate">Gerencie contexto de projetos</p>
                           </div>
-                          <div className="w-5 h-5 rounded-full bg-[#00BFC2]/10 flex items-center justify-center shrink-0">
-                            <svg className="w-2.5 h-2.5 text-[#00BFC2]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                          </div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#00BFC2] shrink-0"></div>
                         </div>
                       </div>
 
-                      <div className="phone-widget saas-stat rounded-xl p-3 mt-3 flex items-center justify-between">
-                        <div>
-                          <p className="text-[8px] text-[#94A29B] uppercase tracking-widest font-semibold">Total</p>
-                          <p className="text-sm font-bold text-white">100% Gratuito</p>
-                        </div>
-                        <div className="px-2.5 py-1 rounded-full bg-[#45E58B]/10 text-[#45E58B] text-[9px] font-bold">
-                          Open Source
+                      <div className="phone-widget mt-auto pt-2">
+                        <div className="saas-card rounded-xl p-2.5 flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-[#45E58B]/20 flex items-center justify-center">
+                            <svg className="w-3 h-3 text-[#45E58B]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                          </div>
+                          <span className="text-[9px] text-[#94A29B]">Em breve</span>
                         </div>
                       </div>
 
